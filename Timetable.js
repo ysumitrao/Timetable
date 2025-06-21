@@ -21,19 +21,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('class-modal');
     const closeBtn = document.querySelector('.close');
     const classForm = document.getElementById('class-form');
+    const days = document.querySelectorAll('.day');
     
+    // User management
     let userId = localStorage.getItem('userId') || generateUserId();
     localStorage.setItem('userId', userId);
-    let timetable = {};
-
-    // Initialize timetable
+    let timetable = initializeEmptyTimetable();
+    
+    // Initialize the app
     loadTimetable();
-
+    
     // Generate unique user ID
     function generateUserId() {
         return 'user-' + Math.random().toString(36).substr(2, 9);
     }
-
+    
+    // Create empty timetable structure
+    function initializeEmptyTimetable() {
+        return {
+            monday: [], tuesday: [], wednesday: [], thursday: [], 
+            friday: [], saturday: [], sunday: []
+        };
+    }
+    
     // Load timetable from Firebase
     function loadTimetable() {
         database.ref('timetables/' + userId).on('value', (snapshot) => {
@@ -41,22 +51,81 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data) {
                 timetable = data;
             } else {
-                // Initialize empty timetable
-                timetable = {
-                    monday: [], tuesday: [], wednesday: [], thursday: [], 
-                    friday: [], saturday: [], sunday: []
-                };
+                // Initialize empty timetable if none exists
+                timetable = initializeEmptyTimetable();
                 saveTimetable();
             }
             renderTimetable();
+        }, (error) => {
+            console.error("Error loading timetable:", error);
+            alert("Error loading your timetable. Please try again later.");
         });
     }
-
+    
     // Save timetable to Firebase
     function saveTimetable() {
-        database.ref('timetables/' + userId).set(timetable);
+        database.ref('timetables/' + userId).set(timetable)
+            .catch((error) => {
+                console.error("Error saving timetable:", error);
+                alert("Error saving your timetable. Please try again.");
+            });
     }
-
+    
+    // Show modal when add class button is clicked
+    addClassBtn.addEventListener('click', function() {
+        document.getElementById('modal-title').textContent = 'Add Class';
+        document.getElementById('edit-index').value = '';
+        classForm.reset();
+        modal.style.display = 'block';
+    });
+    
+    // Close modal when X is clicked
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
+    // Handle form submission
+    classForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const className = document.getElementById('class-name').value;
+        const startTime = document.getElementById('start-time').value;
+        const endTime = document.getElementById('end-time').value;
+        const location = document.getElementById('location').value;
+        const teacher = document.getElementById('teacher').value;
+        const editIndex = document.getElementById('edit-index').value;
+        const selectedDay = daySelector.value;
+        
+        const classData = {
+            name: className,
+            startTime: startTime,
+            endTime: endTime,
+            location: location || 'Not specified',
+            teacher: teacher || 'Not specified'
+        };
+        
+        if (editIndex === '') {
+            // Add new class
+            timetable[selectedDay].push(classData);
+        } else {
+            // Edit existing class
+            timetable[selectedDay][editIndex] = classData;
+        }
+        
+        // Save to Firebase and re-render
+        saveTimetable();
+        
+        // Close modal
+        modal.style.display = 'none';
+    });
+    
     // Function to render the timetable
     function renderTimetable() {
         // Clear all classes first
@@ -126,10 +195,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             timetable[day].splice(index, 1);
             saveTimetable();
-            renderTimetable();
         }
-    }    
-    
+    }
     
     // Helper function to format time (remove seconds)
     function formatTime(timeString) {
