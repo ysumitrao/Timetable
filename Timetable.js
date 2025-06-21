@@ -2,12 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyBB-AAyUaHL_gBKaeKpSbwAmT9WqU7fcCw",
-		authDomain: "https://personalprojects-44283-default-rtdb.firebaseio.com/",
-		projectId: "personalprojects-44283",
-		storageBucket: "https://personalprojects-44283-default-rtdb.asia-southeast1.firebasedatabase.app",
-		messagingSenderId: "28495795339",
-		appId: "1:28495795339:web:5c6a9805bf146c10bff08e",
-		measurementId: "G-JWJR2XZQYX"
+	  authDomain: "personalprojects-44283.firebaseapp.com",
+	  databaseURL: "https://personalprojects-44283-default-rtdb.asia-southeast1.firebasedatabase.app",
+	  projectId: "personalprojects-44283",
+	  storageBucket: "personalprojects-44283.firebasestorage.app",
+	  messagingSenderId: "28495795339",
+	  appId: "1:28495795339:web:5c6a9805bf146c10bff08e",
+	  measurementId: "G-JWJR2XZQYX"
     };
     
     // Initialize Firebase
