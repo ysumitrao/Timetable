@@ -1,3 +1,26 @@
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  // Show your custom install button
+  const installBtn = document.createElement('button');
+  installBtn.textContent = 'Install App';
+  installBtn.classList.add('install-btn');
+  document.body.appendChild(installBtn);
+  
+  installBtn.addEventListener('click', () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') {
+        console.log('User accepted install');
+      }
+      deferredPrompt = null;
+    });
+  });
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     // Firebase configuration
     const firebaseConfig = {
