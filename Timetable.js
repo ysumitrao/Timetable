@@ -165,7 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
         database.ref('timetables/' + currentUser.uid).on('value', (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                timetable = data;
+                timetable = {
+					...initializeEmptyTimetable(),
+					...data
+				};
             } else {
                 // Initialize empty timetable if none exists
                 timetable = initializeEmptyTimetable();
