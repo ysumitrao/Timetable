@@ -2,8 +2,8 @@ const CACHE_NAME = 'timetable-v1';
 const ASSETS = [
   '/',
   '/index.html',
-  '/styles.css',
-  '/script.js',
+  '/Timetable.css',
+  '/Timetable.js',
   '/icons/icon-192.png',
   '/icons/icon-512.png'
 ];
