@@ -306,17 +306,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const className = document.getElementById('class-name').value;
         const startTime = document.getElementById('start-time').value;
         const endTime = document.getElementById('end-time').value;
-        const location = document.getElementById('location').value;
-        const teacher = document.getElementById('teacher').value;
         const editIndex = document.getElementById('edit-index').value;
         const selectedDay = daySelector.value;
         
         const classData = {
             name: className,
             startTime: startTime,
-            endTime: endTime,
-            location: location || 'Not specified',
-            teacher: teacher || 'Not specified'
+            endTime: endTime
         };
         
 		if (!timetable[selectedDay]) {
@@ -360,9 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 li.className = 'class-item';
                 li.innerHTML = `
                     <h3>${classItem.name}</h3>
-                    <p><strong>Time:</strong> ${formatTime(classItem.startTime)} - ${formatTime(classItem.endTime)}</p>
-                    <p><strong>Location:</strong> ${classItem.location}</p>
-                    <p><strong>Teacher:</strong> ${classItem.teacher}</p>
+                    <p><strong>Time:</strong> ${formatTime(classItem.startTime)} - ${formatTime(classItem.endTime)}</p>                    
                     <div class="class-actions">
                         <button class="edit-btn" data-day="${day}" data-index="${index}" ${isViewingShared ? 'disabled' : ''}>Edit</button>
                         <button class="delete-btn" data-day="${day}" data-index="${index}" ${isViewingShared ? 'disabled' : ''}>Delete</button>
@@ -396,8 +390,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('class-name').value = classItem.name;
         document.getElementById('start-time').value = classItem.startTime;
         document.getElementById('end-time').value = classItem.endTime;
-        document.getElementById('location').value = classItem.location;
-        document.getElementById('teacher').value = classItem.teacher;
         
         // Set the day selector to the correct day
         daySelector.value = day;
