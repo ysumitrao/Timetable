@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Timetable</title>
-    <link rel="stylesheet" href="Timetable.css">
-	<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Student Timetable</h1>
+        <header>
+            <h1>Student Timetable</h1>
+            <div class="auth-section">
+                <button id="auth-btn" class="hidden">
+                    <span id="auth-text">Sign In with Google</span>
+                </button>
+                <div id="user-profile" class="hidden">
+                    <img id="user-avatar" src="" alt="User avatar">
+                    <span id="user-name"></span>
+                    <button id="sign-out-btn" title="Sign Out">
+                        <span class="material-icons">logout</span>
+                    </button>
+                </div>
+            </div>
+        </header>
         
         <div class="controls">
             <button id="add-class">Add Class</button>
@@ -23,6 +36,9 @@
                 <option value="saturday">Saturday</option>
                 <option value="sunday">Sunday</option>
             </select>
+            <button id="share-btn" class="share-btn">
+                <span class="material-icons">share</span> Share
+            </button>
         </div>
         
         <div class="timetable">
@@ -88,7 +104,30 @@
             </form>
         </div>
     </div>
+    <!-- Share Modal -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Share Your Timetable</h2>
+            <div class="share-options">
+                <div class="share-link">
+                    <input type="text" id="share-url" readonly>
+                    <button id="copy-link">Copy</button>
+                </div>
+                <p class="share-note">Anyone with this link can view your timetable</p>
+                <div class="permission-control">
+                    <label>
+                        <input type="checkbox" id="public-checkbox">
+                        Make timetable public (visible to everyone)
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <script src="Timetable.js"></script>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
 </body>
 </html>

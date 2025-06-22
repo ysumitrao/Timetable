@@ -1,3 +1,120 @@
+/* Auth Section Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.auth-section {
+    display: flex;
+    align-items: center;
+}
+
+#auth-btn {
+    background-color: #4285F4;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+#auth-btn:hover {
+    background-color: #3367D6;
+}
+
+#user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+#sign-out-btn {
+    background: none;
+    border: none;
+    color: #5f6368;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#sign-out-btn:hover {
+    color: #202124;
+}
+
+/* Share Button Styles */
+.share-btn {
+    background-color: #34a853;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.share-btn:hover {
+    background-color: #2d8e47;
+}
+
+/* Share Modal Styles */
+.share-options {
+    margin-top: 20px;
+}
+
+.share-link {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+#share-url {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+}
+
+#copy-link {
+    background-color: #f1f3f4;
+    border: 1px solid #dadce0;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#copy-link:hover {
+    background-color: #e8eaed;
+}
+
+.share-note {
+    font-size: 14px;
+    color: #5f6368;
+    margin-bottom: 15px;
+}
+
+.permission-control {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.permission-control label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
