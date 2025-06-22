@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Timetable</title>
+    <link rel="stylesheet" href="Timetable.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Timetable</h1>
+            <div class="auth-section">
+                <button id="auth-btn" class="hidden">
+                    <span id="auth-text">Sign In with Google</span>
+                </button>
+                <div id="user-profile" class="hidden">
+                    <img id="user-avatar" src="" alt="User avatar">
+                    <span id="user-name"></span>
+                    <button id="sign-out-btn" title="Sign Out">
+                        <span class="material-icons">logout</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="controls">
+            <button id="add-class">Add Class</button>
+            <select id="day-selector">
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+                <option value="sunday">Sunday</option>
+            </select>
+            <button id="share-btn" class="share-btn">
+                <span class="material-icons">share</span> Share
+            </button>
+        </div>
+        
+        <div class="timetable">
+            <div class="day" id="monday">
+                <h2>Monday</h2>
+                <ul class="classes"></ul>
+            </div>
+            <div class="day" id="tuesday">
+                <h2>Tuesday</h2>
+                <ul class="classes"></ul>
+            </div>
+            <div class="day" id="wednesday">
+                <h2>Wednesday</h2>
+                <ul class="classes"></ul>
+            </div>
+            <div class="day" id="thursday">
+                <h2>Thursday</h2>
+                <ul class="classes"></ul>
+            </div>
+            <div class="day" id="friday">
+                <h2>Friday</h2>
+                <ul class="classes"></ul>
+            </div>
+            <div class="day" id="saturday">
+                <h2>Saturday</h2>
+                <ul class="classes"></ul>
+            </div>
+            <div class="day" id="sunday">
+                <h2>Sunday</h2>
+                <ul class="classes"></ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for adding/editing classes -->
+    <div id="class-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Add Class</h2>
+            <form id="class-form">
+                <input type="hidden" id="edit-index">
+                <div class="form-group">
+                    <label for="class-name">Class Name:</label>
+                    <input type="text" id="class-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="start-time">Start Time:</label>
+                    <input type="time" id="start-time" required>
+                </div>
+                <div class="form-group">
+                    <label for="end-time">End Time:</label>
+                    <input type="time" id="end-time" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location">
+                </div>
+                <div class="form-group">
+                    <label for="teacher">Teacher:</label>
+                    <input type="text" id="teacher">
+                </div>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+    <!-- Share Modal -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Share Your Timetable</h2>
+            <div class="share-options">
+                <div class="share-link">
+                    <input type="text" id="share-url" readonly>
+                    <button id="copy-link">Copy</button>
+                </div>
+                <p class="share-note">Anyone with this link can view your timetable</p>
+                <div class="permission-control">
+                    <label>
+                        <input type="checkbox" id="public-checkbox">
+                        Make timetable public (visible to everyone)
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+	<script src="Timetable.js"></script>
+</body>
+</html>
