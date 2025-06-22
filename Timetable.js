@@ -316,6 +316,10 @@ document.addEventListener('DOMContentLoaded', function() {
             teacher: teacher || 'Not specified'
         };
         
+		if (!timetable[selectedDay]) {
+			timetable[selectedDay] = [];
+		}
+	
         if (editIndex === '') {
             // Add new class
             timetable[selectedDay].push(classData);
